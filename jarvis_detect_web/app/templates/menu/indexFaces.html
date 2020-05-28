@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+    <br/>
+    <h1>Entre com os dados do Colaborador</h1><br/><br/>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="form-group">
+                <label>Qual o Nome dele ? </label><br/>
+                {{ form.nome }}
+                <br/><br/><br/>
+                <label>Qual a função dele </label><br/>
+                {{ form.tipo_colaborador }}
+            </div>
+        </div>
+        <br/>
+        <div class="form-group">
+            <input type="submit" value="Selecionar Foto">
+        </div>
+    </form>
+
+{% endblock conteudo %}

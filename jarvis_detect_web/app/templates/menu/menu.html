@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo%}
+        <form method="post">
+        {% csrf_token %}
+        <br/><br/>  <h5>Vamos Começar !!!</h5><br/>
+        <div class="form-group">
+            <label>Por favor - Selecione uma das Opções: </label>
+            <div class="form-group">
+                {{ form_menu.menu }}
+            </div>
+        </div>
+        <br/>
+        <div class="form-group">
+            <input type="submit" value="Executar">
+        </div>
+        </form>
+{% endblock conteudo %}

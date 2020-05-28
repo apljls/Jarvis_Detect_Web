@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+     <h1>Jarvis - Detecção de Pessoas</h1>
+     <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Por favor - Selecione o grau de Certeza que procura: </label>
+            <div class="form-group">
+                {{ form_detect_people.certeza }}
+            </div>
+        </div>
+         <div class="form-group">
+            <label>Por favor - Selecione o Arquivo a ser analisado: </label>
+            <div class="form-group">
+                {{ form_detect_people.arq }}
+            </div>
+        </div>
+         <br/>
+        <div class="form-group">
+           <input type="submit" value="Detectar">
+        </div>
+
+     </form>
+
+{% endblock conteudo %}

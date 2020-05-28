@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+     <h1>Jarvis - Detecção de Faces</h1>
+     <form method="post">
+        {% csrf_token %}
+         <div class="form-group">
+            <label>Por favor - clique no botão para Localizar o arquivo </label>
+        </div>
+        <div class="form-group">
+           <input type="submit" value="Localizar arquivo !!!">
+        </div>
+     </form>
+
+{% endblock conteudo %}

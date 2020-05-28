@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+    <h1>Listagem do bucket: </h1>
+    {% for lista_bucket in lista_bucket%}
+        <div class="card">
+            <p class="card-text">{{ lista_bucket.key }}</p>
+        </div>
+    {% endfor %}
+{% endblock conteudo %}

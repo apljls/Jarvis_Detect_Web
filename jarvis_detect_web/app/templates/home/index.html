@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block conteudo %}
+
+        <h2>Tecninjas - Jarvis</h2><br/>
+        <h3>Bem vindo !!!</h3><br/><br/>
+        <h6>Este é um protótipo do Jarvis Detect, clique em 'Iniciar' para experimentar a aplicação !!!</h6><br/>
+        <br/><br/><br/><br/><br/><br/>
+        <!--<img src="{% static 'app/imagens/Jarvis_team_1280_x_1024.jpg' %} " class="img-fluid" alt="Responsive image"><br/>-->
+        <a href="{% url 'menu' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Iniciar</a>
+{% endblock conteudo %}

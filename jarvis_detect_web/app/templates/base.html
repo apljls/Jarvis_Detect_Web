@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Jarvis</title>
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+</head>
+</body>
+    <style>
+        body{
+            background-image: url("{% static 'app/imagens/img_Rizoma.png' %}");
+            background-repeat: no-repeat;
+            background-position: 100% 100%;
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!--<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">-->
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'app/imagens/new_Logo_Jarvis_robo.png' %}" width="25%" align="left">
+      </a>
+      <a class="navbar-brand" href="{% url 'home_page' %}">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'menu' %}">Menu<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+      <a class="navbar-brand" href="#">
+          <img src="{% static 'app/imagens/new_Logo_txt_TecNinjas.png' %}" width="18%" align="right">
+      </a>
+    </nav>
+    <main class="container">
+        {% block conteudo %}
+
+        {% endblock conteudo%}
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
