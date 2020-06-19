@@ -31,6 +31,9 @@ def exibe_label_boundingbox(photo, confidence):
         image = Image.open(stream)
         # Call DetectFaces
         response = client.detect_labels(Image={'S3Object': {'Bucket': bucket, 'Name': photo}})
+        print('##############################################################################')
+        print(f'Response = {response}')
+        print('##############################################################################')
 
     elif source == 'local':
         # Load local image
@@ -41,7 +44,7 @@ def exibe_label_boundingbox(photo, confidence):
         image = Image.open(stream)
     imgWidth, imgHeight = image.size
     draw = ImageDraw.Draw(image)
-    draw.text((1, 1), 'IMAGEM ANALISADA COM BOTO3 DETECT_LABELS')
+    draw.text((1, 1), 'IMAGEM ANALISADA ATRAVÉS DA APLICAÇÃO JARVIS DETECT')
     count = 0
     # calculate and display bounding boxes for each detected face
     # print('Detected faces for ' + photo)
@@ -79,5 +82,4 @@ def exibe_label_boundingbox(photo, confidence):
     image.show()
     return count
 
-# abre_foto(s3,s3Bucket,arq_name)
-# exibe_label_boundingbox('local', s3Bucket, arq_name, certeza, 'S3')
+

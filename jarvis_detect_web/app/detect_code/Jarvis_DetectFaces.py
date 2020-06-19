@@ -94,8 +94,8 @@ def exibe_imagem_boundingbox(arq_name):
     client = core_objects('client')  # boto3.client('rekognition')
     dynamodb = core_objects('DynamoDB')
     tbl_dynamoDB = core_objects('tbl_dynamoDB')
-    CollectionId = 'family_collection'
-    # CollectionId = core_objects('IndexCollectionID')
+    # CollectionId = 'family_collection'
+    CollectionId = core_objects('IndexCollectionID')
 
     # Load image from S3 bucket
     s3_connection = s3

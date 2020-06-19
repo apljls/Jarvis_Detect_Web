@@ -7,6 +7,7 @@ from .detect_code.Jarvis_DetectPeople import exibe_label_boundingbox
 from .detect_code.Jarvis_DetectFaces import exibe_imagem_boundingbox
 from .detect_code.Jarvis_Objects import core_objects
 from .detect_code.Jarvis_ControlArqBucket import exporta_arquivo_bkt, deleta_arquivo_bkt
+from .detect_code.Jarvis_Index_Imagens import index_imagem
 from _datetime import datetime
 
 
@@ -108,7 +109,8 @@ def opc_05(request):
             data_atual = datetime.now().strftime('%Y%m%d_%H%M%S')
             name_arq = ('img_' + data_atual + '.jpg')
 
-            exporta_arquivo_bkt(name_arq, root.fileName)
+            bucket = core_objects('s3Bucket')
+            exporta_arquivo_bkt(name_arq, root.fileName, bucket)
 
             count = exibe_label_boundingbox(name_arq, var_certeza)
             root.destroy()
@@ -130,7 +132,9 @@ def opc_06(request):
         data_atual = datetime.now().strftime('%Y%m%d_%H%M%S')
         name_arq = ('img_' + data_atual + '.jpg')
 
-        exporta_arquivo_bkt(name_arq, root.fileName)
+
+        bucket = core_objects('s3Bucket')
+        exporta_arquivo_bkt(name_arq, root.fileName, bucket)
 
         count = exibe_imagem_boundingbox(name_arq)
         root.destroy()
@@ -140,29 +144,34 @@ def opc_06(request):
 
 # --- Indexar Fotos no DynamoDB
 def opc_07(request):
-    # Criar Fluxo para indexar Fotos no DynamoDB
     if request.method == 'POST':
 
         form = TipoColaboradorForm(request.POST)
         if form.is_valid():
-            opc = form.cleaned_data['tipo_colaborador']  # 1-Colaborador // 2-TecNinja
+            tpColab = form.cleaned_data['tipo_colaborador']  # 1-Colaborador // 2-TecNinja
             nome = form.cleaned_data['nome']
+
+            if tpColab == 1:
+                tipoColaborador = 'Colaborador'
+            elif tpColab == 2:
+                tipoColaborador = 'TecNinja'
 
             root = Tk()
             root.fileName = filedialog.askopenfilename(filetypes=(("Image Files", "*.jpg"), ("All files", "*.*")))
 
             data_atual = datetime.now().strftime('%Y%m%d_%H%M%S')
             name_arq = ('img_' + data_atual + '.jpg')
+            root_filename = root.fileName
 
-            s3Bucket_index = core_objects('s3Bucket_index')  # 'jarvisdetect-index' Bucket de indexação
+            print('Iniciando o Fluxo do Jarvis_Index_Imagens')
 
-            # exporta_arquivo_bkt(name_arq, root.fileName, s3Bucket_index)
-            # exporta_arquivo_index(name_arq, root.fileName, s3Bucket_index)
-            # count = exibe_imagem_boundingbox(name_arq)
-            count = 0
+            #  ------------- Isso está em   Jarvis_Index_Imagens.py
+            index_imagem(name_arq, root_filename, nome, tipoColaborador)
 
-            print(f'Nome do arquivo: {name_arq}, o tipo de colaborador: {opc}, Nome da Pessoa: {nome}')
+            print(f'Nome do arquivo: {name_arq}, o tipo de colaborador: {tipoColaborador}, Nome da Pessoa: {nome}')
             root.destroy()
+
+            count = 0
             return render(request, 'menu/result.html', {'result_count': count})
     else:
         form = TipoColaboradorForm()

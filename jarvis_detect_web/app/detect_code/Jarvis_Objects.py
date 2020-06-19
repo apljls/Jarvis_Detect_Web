@@ -15,12 +15,13 @@ def core_objects(type_object):
         return cliente
 
     elif type_object == 's3Bucket':
-        s3Bucket = 'filaatmdetections3jarvis' # -- NOVO BUCKET --- jarvisdetect
+        s3Bucket = 'filaatmdetections3jarvis'
+        # s3Bucket = 'jarvisdetect'  # -- NOVO BUCKET
         return s3Bucket
 
-    elif type_object == 's3Bucket_index':
+    elif type_object == 's3Bucket_index':   # -- BUCKET DE ARQUIVOS PRÉ-INDEXAÇÃO -- #
         # s3Bucket_index = 'filaatmdetections3jarvis-index'
-        s3Bucket_index = 'jarvisdetect-index'  # -- NOVO BUCKET -- #
+        s3Bucket_index = 'jarvisdetect-index'
         return s3Bucket_index
 
     elif type_object == 'DynamoDB':
@@ -28,7 +29,7 @@ def core_objects(type_object):
         return dynamodb
 
     elif type_object == 'tbl_dynamoDB':
-        tbl_dynamoDB = 't_jarvis_detect' # --- Tabela antiga: tjarvisfaces
+        tbl_dynamoDB = 't_jarvis_detect'  # --- Tabela antiga: tjarvisfaces
         return tbl_dynamoDB
 
     # ----- ANTIGA Collection
@@ -43,13 +44,13 @@ def core_objects(type_object):
 
     elif type_object == 'lst_bucket_dict':
         s3 = boto3.resource('s3')
-        s3Bucket = 'filaatmdetections3jarvis'
+        s3Bucket = core_objects('s3Bucket')
         file = s3.Bucket(s3Bucket).objects.all()
         count = 1
         varDict = {}
         for file in file:
             str_count = str(count)
             varDict[str_count] = file.key
-            count = count+1
+            count = count + 1
 
         return varDict
